@@ -1,23 +1,14 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.css";
+import Tableau from "./components/Tableau";
 
 function App() {
+  const nameColumn = ["Fondation", "Assainnissement", "Murs", "Finition"];
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1 className="text-3xl font-bold m-8	">Bienvenue !</h1>
+      <Tableau nameColumn={nameColumn} />
     </div>
   );
 }

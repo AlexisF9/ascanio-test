@@ -13,10 +13,13 @@ export default function Tableau(props) {
     let oldItems = JSON.parse(localStorage.getItem(id)) || [];
 
     let newItems = content;
+    //{ id: new Date().getTime(), content: content }
 
-    oldItems.push(newItems);
+    if (!oldItems.find((element) => element === newItems)) {
+      oldItems.push(newItems);
 
-    localStorage.setItem(id, JSON.stringify(oldItems));
+      localStorage.setItem(id, JSON.stringify(oldItems));
+    }
 
     // if (localStorage.getItem(id)) {
     //   await item.push(JSON.parse(localStorage.getItem(id)));
@@ -43,7 +46,7 @@ export default function Tableau(props) {
           <div class="flex-1 h-max bg-slate-200 mx-2 p-2" key={index}>
             <h2 class="text-center font-bold mb-2">{item}</h2>
 
-            <Card id={index} reload={reload} />
+            <Card id={index} reload={reload} setReload={setReload} />
 
             {id === index && (
               <form onSubmit={handleSubmit} class="mt-4">

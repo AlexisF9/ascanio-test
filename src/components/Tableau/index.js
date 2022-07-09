@@ -10,13 +10,31 @@ export default function Tableau(props) {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    let item = await { idColumn: id, content: content };
-    await localStorage.setItem(id, JSON.stringify(item));
+    let oldItems = JSON.parse(localStorage.getItem(id)) || [];
+
+    let newItems = content;
+
+    oldItems.push(newItems);
+
+    localStorage.setItem(id, JSON.stringify(oldItems));
+
+    // if (localStorage.getItem(id)) {
+    //   await item.push(JSON.parse(localStorage.getItem(id)));
+    //   await item.push(content);
+    //   await localStorage.setItem(id, JSON.stringify(item));
+    //   console.log(item);
+    // } else {
+    //   await item.push(content);
+    //   await localStorage.setItem(id, JSON.stringify(item));
+    // }
 
     setReload(!reload);
     setContent("");
     setId("");
   };
+
+  // console.log(new Date().getTime());
+  // console.log(localStorage.length);
 
   return (
     <div class="flex">

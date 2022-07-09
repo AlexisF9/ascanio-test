@@ -12,6 +12,16 @@ export default function Card({ id, reload }) {
   }
 
   return (
-    <>{data && <div class="bg-secondary p-2">{<p>{data.content}</p>}</div>}</>
+    <>
+       
+      {data &&
+        data.map((item, index) => {
+          return (
+            <p class="bg-secondary p-2 mt-2" key={index}>
+              {item}
+            </p>
+          );
+        })}
+    </>
   );
 }

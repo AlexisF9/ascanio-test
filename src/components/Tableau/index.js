@@ -12,7 +12,7 @@ export default function Tableau(props) {
 
     let oldItems = JSON.parse(localStorage.getItem(id)) || [];
 
-    let newItems = content;
+    let newItems = { id: new Date().getTime(), content: content };
     //{ id: new Date().getTime(), content: content }
 
     if (!oldItems.find((element) => element === newItems)) {
@@ -20,16 +20,6 @@ export default function Tableau(props) {
 
       localStorage.setItem(id, JSON.stringify(oldItems));
     }
-
-    // if (localStorage.getItem(id)) {
-    //   await item.push(JSON.parse(localStorage.getItem(id)));
-    //   await item.push(content);
-    //   await localStorage.setItem(id, JSON.stringify(item));
-    //   console.log(item);
-    // } else {
-    //   await item.push(content);
-    //   await localStorage.setItem(id, JSON.stringify(item));
-    // }
 
     setReload(!reload);
     setContent("");
@@ -43,33 +33,39 @@ export default function Tableau(props) {
     <div class="flex">
       {props.nameColumn.map((item, index) => {
         return (
-          <div class="flex-1 h-max bg-slate-200 mx-2 p-2" key={index}>
-            <h2 class="text-center font-bold mb-2">{item}</h2>
+          <div
+            class="flex-1 h-max bg-slate-200 mx-2 p-4 rounded-md max-w-md	"
+            key={index}
+          >
+            <h2 class="text-center mb-2 uppercase">{item}</h2>
 
             <Card id={index} reload={reload} setReload={setReload} />
 
             {id === index && (
-              <form onSubmit={handleSubmit} class="mt-4">
+              <form onSubmit={handleSubmit} class="mt-8 flex">
                 <input
                   type="text"
+                  class="p-2 "
                   value={content}
                   onChange={(e) => {
                     setContent(e.currentTarget.value);
                     setId(index);
                   }}
                 />
-                <button type="submit">Add</button>
+                <button class="material-symbols-outlined p-2" type="submit">
+                  add
+                </button>
               </form>
             )}
 
             <button
-              class="mt-2 px-2 bg-primary text-center"
+              class="mt-4 p-3 bg-primary text-center rounded"
               onClick={() => {
                 id === index ? setId("") : setId(index);
                 setContent("");
               }}
             >
-              {id === index ? "-" : "+"}
+              {id === index ? "Annuler" : "Nouvelle carte"}
             </button>
           </div>
         );

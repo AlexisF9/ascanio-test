@@ -6,8 +6,8 @@ function App() {
   const nameColumn = ["Fondation", "Assainnissement", "Murs", "Finition"];
 
   return (
-    <div>
-      <h1 className="text-3xl font-bold m-8	">Bienvenue !</h1>
+    <div className="bg-dark m-0 min-h-screen pt-8">
+      <img className="h-28 mb-8 ml-8" src="/logo.png" />
       <Tableau nameColumn={nameColumn} />
     </div>
   );

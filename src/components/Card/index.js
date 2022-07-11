@@ -5,6 +5,7 @@ export default function Card({ id, reload, setReload }) {
 
   const [edit, setEdit] = useState(false);
   const [editContent, setEditContent] = useState();
+  const [editId, setEditId] = useState();
 
   useEffect(() => {
     fetchData();
@@ -15,18 +16,17 @@ export default function Card({ id, reload, setReload }) {
   }
 
   async function editItem(e) {
-    let index = await data.findIndex((element) => element === e);
-    data[index].content = await editContent;
+    data[editId].content = await editContent;
     localStorage.setItem(id, JSON.stringify(data));
 
+    setEditId("");
     setReload(!reload);
     setEdit(false);
   }
 
   async function suppItem(e) {
     if (window.confirm("Êtes vous sur de vouloir supprimer cet element ?")) {
-      let index = await data.findIndex((element) => element === e);
-      await data.splice(index, 1);
+      await data.splice(e, 1);
       localStorage.setItem(id, JSON.stringify(data));
 
       setReload(!reload);
@@ -43,7 +43,7 @@ export default function Card({ id, reload, setReload }) {
               class="bg-secondary p-4 mt-4 flex justify-between rounded break-all"
               key={index}
             >
-              {edit ? (
+              {edit && editId === index ? (
                 <input
                   onChange={(e) => {
                     setEditContent(e.currentTarget.value);
@@ -68,6 +68,7 @@ export default function Card({ id, reload, setReload }) {
                     onClick={() => {
                       setEdit(true);
                       setEditContent(item.content);
+                      setEditId(index);
                     }}
                   >
                     edit
@@ -75,7 +76,7 @@ export default function Card({ id, reload, setReload }) {
                 )}
                 <button
                   class="material-symbols-outlined "
-                  onClick={() => suppItem(item)}
+                  onClick={() => suppItem(index)}
                 >
                   delete
                 </button>

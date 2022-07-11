@@ -12,12 +12,12 @@ export default function Tableau(props) {
 
     let oldItems = JSON.parse(localStorage.getItem(id)) || [];
 
-    let newItems = { id: new Date().getTime(), content: content };
-    //{ id: new Date().getTime(), content: content }
+    let newItems = { /*id: new Date().getTime(),*/ content: content };
 
-    if (!oldItems.find((element) => element === newItems)) {
+    if (oldItems.find((element) => element.content === newItems.content)) {
+      alert("Attention cette carte existe déjà");
+    } else {
       oldItems.push(newItems);
-
       localStorage.setItem(id, JSON.stringify(oldItems));
     }
 
@@ -25,9 +25,6 @@ export default function Tableau(props) {
     setContent("");
     setId("");
   };
-
-  // console.log(new Date().getTime());
-  // console.log(localStorage.length);
 
   return (
     <div class="flex">

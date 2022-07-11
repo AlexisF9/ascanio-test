@@ -16,7 +16,10 @@ export default function ({ reload, index, setReload }) {
 
       let newItems = await { content: content, location: response[0].nom };
 
-      if (oldItems.find((element) => element.content === newItems.content)) {
+      if (
+        oldItems.find((element) => element.content === newItems.content) &&
+        oldItems.find((element) => element.location === newItems.location)
+      ) {
         alert("Attention cette carte existe déjà");
       } else {
         oldItems.push(newItems);

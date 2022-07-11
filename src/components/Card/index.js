@@ -35,7 +35,6 @@ export default function Card({ id, reload, setReload }) {
 
   return (
     <>
-       
       {data &&
         data.map((item, index) => {
           return (
@@ -52,8 +51,11 @@ export default function Card({ id, reload, setReload }) {
                 />
               ) : (
                 <div>
-                  <p>{item.content}</p>
-                  <p>{item.location}</p>
+                  <p class="font-bold">{item.content}</p>
+                  <p class="flex mt-4">
+                    <span class="material-symbols-outlined">push_pin</span>
+                    {item.location}
+                  </p>
                 </div>
               )}
 

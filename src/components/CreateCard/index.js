@@ -5,13 +5,13 @@ export default function ({ reload, index, setReload }) {
   const [content, setContent] = useState();
   const [search, setSearch] = useState();
 
-  const [data, setData] = useState();
+  const [location, setLocation] = useState();
 
   const handleSearch = async () => {
     try {
       const rep = await fetch(`https://geo.api.gouv.fr/communes?nom=${search}`);
       const response = await rep.json();
-      setData(response);
+      setLocation(response);
     } catch (e) {
       console.log(e);
     }
@@ -23,10 +23,7 @@ export default function ({ reload, index, setReload }) {
     let oldItems = JSON.parse(localStorage.getItem(id)) || [];
 
     try {
-      const rep = await fetch(`https://geo.api.gouv.fr/communes?nom=${search}`);
-      const response = await rep.json();
-
-      let newItems = await { content: content, location: response[0].nom };
+      let newItems = await { content: content, location: search };
 
       if (
         oldItems.find((element) => element.content === newItems.content) &&
@@ -50,11 +47,11 @@ export default function ({ reload, index, setReload }) {
   return (
     <>
       {id === index && (
-        <form onSubmit={handleSubmit} class="mt-8 flex flex-col	">
+        <form onSubmit={handleSubmit} className="mt-8 flex flex-col	">
           <input
             placeholder="Contenu"
             type="text"
-            class="p-2 "
+            className="p-2 "
             value={content}
             onChange={(e) => {
               setContent(e.currentTarget.value);
@@ -63,43 +60,43 @@ export default function ({ reload, index, setReload }) {
           />
 
           <input
-            list="brow"
+            list="listLocation"
             type="text"
+            placeholder="Localisation"
+            className="p-2 mt-2"
             onChange={(e) => {
               setSearch(e.currentTarget.value);
               handleSearch();
             }}
             value={search}
           />
-          {data && (
-            <datalist id="brow">
-              {data.map((item, index) => {
-                return <option key={index} value={item.nom} />;
+          {location && (
+            <datalist id="listLocation">
+              {location.map((item, index) => {
+                return (
+                  <option
+                    key={index}
+                    onClick={() => setSearch(item.nom)}
+                    value={item.nom}
+                  />
+                );
               })}
             </datalist>
           )}
 
-          {/* <input
-            class="p-2 mt-2"
-            placeholder="Localisation"
-            type="text"
-            onChange={(e) => {
-              setSearch(e.currentTarget.value);
-            }}
-            value={search}
-          /> */}
-
-          <button class="material-symbols-outlined p-2" type="submit">
-            add
+          <button className="w-max flex p-2" type="submit">
+            <span className="material-symbols-outlined">add</span>
+            Ajouter
           </button>
         </form>
       )}
 
       <button
-        class="mt-4 p-3 bg-primary text-center rounded"
+        className="mt-4 p-3 bg-primary text-center rounded"
         onClick={() => {
           id === index ? setId("") : setId(index);
           setContent("");
+          setSearch("");
         }}
       >
         {id === index ? "Annuler" : "Nouvelle carte"}

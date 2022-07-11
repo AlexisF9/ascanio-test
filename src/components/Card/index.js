@@ -39,7 +39,7 @@ export default function Card({ id, reload, setReload }) {
         data.map((item, index) => {
           return (
             <div
-              class="bg-secondary p-4 mt-4 flex justify-between rounded break-all"
+              className="bg-secondary p-4 mt-4 flex justify-between rounded break-all"
               key={index}
             >
               {edit && editId === index ? (
@@ -51,9 +51,9 @@ export default function Card({ id, reload, setReload }) {
                 />
               ) : (
                 <div>
-                  <p class="font-bold">{item.content}</p>
-                  <p class="flex mt-4">
-                    <span class="material-symbols-outlined">push_pin</span>
+                  <p className="font-bold">{item.content}</p>
+                  <p className="flex mt-4">
+                    <span className="material-symbols-outlined">push_pin</span>
                     {item.location}
                   </p>
                 </div>
@@ -62,14 +62,14 @@ export default function Card({ id, reload, setReload }) {
               <div>
                 {edit ? (
                   <button
-                    class="material-symbols-outlined"
+                    className="material-symbols-outlined"
                     onClick={() => editItem(item)}
                   >
                     done
                   </button>
                 ) : (
                   <button
-                    class="material-symbols-outlined"
+                    className="material-symbols-outlined"
                     onClick={() => {
                       setEdit(true);
                       setEditContent(item.content);
@@ -80,7 +80,7 @@ export default function Card({ id, reload, setReload }) {
                   </button>
                 )}
                 <button
-                  class="material-symbols-outlined "
+                  className="material-symbols-outlined "
                   onClick={() => suppItem(index)}
                 >
                   delete

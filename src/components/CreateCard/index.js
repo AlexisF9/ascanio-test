@@ -5,6 +5,18 @@ export default function ({ reload, index, setReload }) {
   const [content, setContent] = useState();
   const [search, setSearch] = useState();
 
+  const [data, setData] = useState();
+
+  const handleSearch = async () => {
+    try {
+      const rep = await fetch(`https://geo.api.gouv.fr/communes?nom=${search}`);
+      const response = await rep.json();
+      setData(response);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -49,7 +61,25 @@ export default function ({ reload, index, setReload }) {
               setId(index);
             }}
           />
+
           <input
+            list="brow"
+            type="text"
+            onChange={(e) => {
+              setSearch(e.currentTarget.value);
+              handleSearch();
+            }}
+            value={search}
+          />
+          {data && (
+            <datalist id="brow">
+              {data.map((item, index) => {
+                return <option key={index} value={item.nom} />;
+              })}
+            </datalist>
+          )}
+
+          {/* <input
             class="p-2 mt-2"
             placeholder="Localisation"
             type="text"
@@ -57,7 +87,7 @@ export default function ({ reload, index, setReload }) {
               setSearch(e.currentTarget.value);
             }}
             value={search}
-          />
+          /> */}
 
           <button class="material-symbols-outlined p-2" type="submit">
             add

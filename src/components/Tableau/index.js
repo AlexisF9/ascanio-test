@@ -4,6 +4,7 @@ import Card from "../Card";
 export default function Tableau(props) {
   const [id, setId] = useState();
   const [content, setContent] = useState();
+  const [search, setSearch] = useState();
 
   const [reload, setReload] = useState(false);
 
@@ -12,17 +13,25 @@ export default function Tableau(props) {
 
     let oldItems = JSON.parse(localStorage.getItem(id)) || [];
 
-    let newItems = { /*id: new Date().getTime(),*/ content: content };
+    try {
+      const rep = await fetch(`https://geo.api.gouv.fr/communes?nom=${search}`);
+      const response = await rep.json();
 
-    if (oldItems.find((element) => element.content === newItems.content)) {
-      alert("Attention cette carte existe déjà");
-    } else {
-      oldItems.push(newItems);
-      localStorage.setItem(id, JSON.stringify(oldItems));
+      let newItems = await { content: content, location: response[0].nom };
+
+      if (oldItems.find((element) => element.content === newItems.content)) {
+        alert("Attention cette carte existe déjà");
+      } else {
+        oldItems.push(newItems);
+        localStorage.setItem(id, JSON.stringify(oldItems));
+      }
+    } catch (e) {
+      console.log(e);
     }
 
     setReload(!reload);
     setContent("");
+    setSearch("");
     setId("");
   };
 
@@ -48,6 +57,13 @@ export default function Tableau(props) {
                     setContent(e.currentTarget.value);
                     setId(index);
                   }}
+                />
+                <input
+                  type="text"
+                  onChange={(e) => {
+                    setSearch(e.currentTarget.value);
+                  }}
+                  value={search}
                 />
                 <button class="material-symbols-outlined p-2" type="submit">
                   add

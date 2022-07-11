@@ -51,7 +51,10 @@ export default function Card({ id, reload, setReload }) {
                   value={editContent}
                 />
               ) : (
-                <p>{item.content}</p>
+                <div>
+                  <p>{item.content}</p>
+                  <p>{item.location}</p>
+                </div>
               )}
 
               <div>

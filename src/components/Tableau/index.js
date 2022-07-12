@@ -6,11 +6,11 @@ export default function Tableau(props) {
   const [reload, setReload] = useState(false);
 
   return (
-    <div className="flex">
+    <div className="flex flex-col md:flex-row">
       {props.nameColumn.map((item, index) => {
         return (
           <div
-            className="flex-1 h-max bg-slate-200 mx-2 p-4 rounded-md max-w-md	"
+            className="mt-4 md:mt-0 md:flex-1 h-max bg-slate-200 mx-2 p-2 md:p-4 rounded-md md:max-w-md	"
             key={index}
           >
             <h2 className="text-center mb-2 uppercase">{item}</h2>

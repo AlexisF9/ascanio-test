@@ -84,7 +84,7 @@ export default function ({ reload, index, setReload }) {
             </datalist>
           )}
 
-          <button className="w-max flex p-2" type="submit">
+          <button className="w-max flex p-2 font-bold	" type="submit">
             <span className="material-symbols-outlined">add</span>
             Ajouter
           </button>
@@ -92,7 +92,7 @@ export default function ({ reload, index, setReload }) {
       )}
 
       <button
-        className="mt-4 p-3 bg-primary text-center rounded"
+        className="mt-4 p-2 md:p-3 bg-primary text-center rounded"
         onClick={() => {
           id === index ? setId("") : setId(index);
           setContent("");

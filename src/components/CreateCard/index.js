@@ -7,6 +7,7 @@ export default function ({ reload, index, setReload }) {
 
   const [location, setLocation] = useState();
 
+  // fetch de l'API
   const handleSearch = async () => {
     try {
       const rep = await fetch(`https://geo.api.gouv.fr/communes?nom=${search}`);
@@ -17,14 +18,17 @@ export default function ({ reload, index, setReload }) {
     }
   };
 
+  // Ajout d'une nouvelle carte
   const handleSubmit = async (event) => {
     event.preventDefault();
 
+    // Je réccupère les anciennes cartes (si il y en a)
     let oldItems = JSON.parse(localStorage.getItem(id)) || [];
 
     try {
       let newItems = await { content: content, location: search };
 
+      // Si la carte n'exciste pas déjà
       if (
         oldItems.find((element) => element.content === newItems.content) &&
         oldItems.find((element) => element.location === newItems.location)
@@ -49,6 +53,7 @@ export default function ({ reload, index, setReload }) {
       {id === index && (
         <form onSubmit={handleSubmit} className="mt-8 flex flex-col	">
           <input
+            required
             placeholder="Contenu"
             type="text"
             className="p-2 "
@@ -60,17 +65,18 @@ export default function ({ reload, index, setReload }) {
           />
 
           <input
+            required
             list="listLocation"
             type="text"
             placeholder="Localisation"
             className="p-2 mt-2"
             onChange={(e) => {
               setSearch(e.currentTarget.value);
-              handleSearch();
+              handleSearch(); // Je relance la recherche de communes à chaque nouvelle lettre ajouté
             }}
             value={search}
           />
-          {location && (
+          {location && ( // Si les communes sont trouvés je les listes
             <datalist id="listLocation">
               {location.map((item, index) => {
                 return (
@@ -94,6 +100,8 @@ export default function ({ reload, index, setReload }) {
       <button
         className="mt-4 p-2 md:p-3 bg-primary text-center rounded"
         onClick={() => {
+          // Au clique je set l'id de la colonne et affiche le fomulaire d'ajout.
+          // Au re-clique je vide mon id ce qui ferme le formulaire et vide tout mes champs
           id === index ? setId("") : setId(index);
           setContent("");
           setSearch("");

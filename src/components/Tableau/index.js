@@ -7,6 +7,7 @@ export default function Tableau(props) {
 
   return (
     <div className="flex flex-col md:flex-row">
+      {/* Je parcours mes nom de colonne passé en props et j'en créé une par nom */}
       {props.nameColumn.map((item, index) => {
         return (
           <div

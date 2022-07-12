@@ -7,6 +7,7 @@ export default function Card({ id, reload, setReload }) {
   const [editContent, setEditContent] = useState();
   const [editId, setEditId] = useState();
 
+  // Je fais une mise à jours des cartes à chaque fois qu'un changement est enregistré
   useEffect(() => {
     fetchData();
   }, [reload]);
@@ -15,15 +16,21 @@ export default function Card({ id, reload, setReload }) {
     setData(JSON.parse(localStorage.getItem(id)));
   }
 
+  // Modification d'une carte
   async function editItem(e) {
-    data[editId].content = await editContent;
-    localStorage.setItem(id, JSON.stringify(data));
+    if (editContent) {
+      data[editId].content = await editContent;
+      localStorage.setItem(id, JSON.stringify(data));
+    } else {
+      alert("Votre contenu ne peut pas être vide");
+    }
 
     setEditId("");
     setReload(!reload);
     setEdit(false);
   }
 
+  // Suppression d'une carte
   async function suppItem(e) {
     if (window.confirm("Êtes vous sur de vouloir supprimer cet element ?")) {
       await data.splice(e, 1);

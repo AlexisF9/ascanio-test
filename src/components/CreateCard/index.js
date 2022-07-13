@@ -1,22 +1,10 @@
 import { useState } from "react";
+import SearchLocation from "../SearchLocation";
 
 export default function ({ reload, index, setReload }) {
   const [id, setId] = useState();
   const [content, setContent] = useState();
   const [search, setSearch] = useState();
-
-  const [location, setLocation] = useState();
-
-  // fetch de l'API
-  const handleSearch = async () => {
-    try {
-      const rep = await fetch(`https://geo.api.gouv.fr/communes?nom=${search}`);
-      const response = await rep.json();
-      setLocation(response);
-    } catch (e) {
-      console.log(e);
-    }
-  };
 
   // Ajout d'une nouvelle carte
   const handleSubmit = async (event) => {
@@ -64,31 +52,7 @@ export default function ({ reload, index, setReload }) {
             }}
           />
 
-          <input
-            required
-            list="listLocation"
-            type="text"
-            placeholder="Localisation"
-            className="p-2 mt-2"
-            onChange={(e) => {
-              setSearch(e.currentTarget.value);
-              handleSearch(); // Je relance la recherche de communes à chaque nouvelle lettre ajouté
-            }}
-            value={search}
-          />
-          {location && ( // Si les communes sont trouvés je les listes
-            <datalist id="listLocation">
-              {location.map((item, index) => {
-                return (
-                  <option
-                    key={index}
-                    onClick={() => setSearch(item.nom)}
-                    value={item.nom}
-                  />
-                );
-              })}
-            </datalist>
-          )}
+          <SearchLocation setSearch={setSearch} search={search} />
 
           <button className="w-max flex p-2 font-bold	" type="submit">
             <span className="material-symbols-outlined">add</span>

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import SearchLocation from "../SearchLocation";
 
 export default function Card({ id, reload, setReload }) {
   const [data, setData] = useState();
@@ -6,6 +7,7 @@ export default function Card({ id, reload, setReload }) {
   const [edit, setEdit] = useState(false);
   const [editContent, setEditContent] = useState();
   const [editId, setEditId] = useState();
+  const [search, setSearch] = useState();
 
   // Je fais une mise à jours des cartes à chaque fois qu'un changement est enregistré
   useEffect(() => {
@@ -20,6 +22,7 @@ export default function Card({ id, reload, setReload }) {
   async function editItem(e) {
     if (editContent) {
       data[editId].content = await editContent;
+      data[editId].location = await search;
       localStorage.setItem(id, JSON.stringify(data));
     } else {
       alert("Votre contenu ne peut pas être vide");
@@ -49,13 +52,20 @@ export default function Card({ id, reload, setReload }) {
               className="bg-secondary p-4 mt-4 flex justify-between rounded break-all"
               key={index}
             >
-              {edit && editId === index ? (
-                <input
-                  onChange={(e) => {
-                    setEditContent(e.currentTarget.value);
-                  }}
-                  value={editContent}
-                />
+              {edit && editId === index ? ( // On edit les infos ou on les affiches
+                <div className="flex flex-col">
+                  <input
+                    placeholder="Content"
+                    type="text"
+                    className="p-2"
+                    onChange={(e) => {
+                      setEditContent(e.currentTarget.value);
+                    }}
+                    value={editContent}
+                  />
+
+                  <SearchLocation setSearch={setSearch} search={search} />
+                </div>
               ) : (
                 <div>
                   <p className="font-bold">{item.content}</p>
@@ -80,6 +90,7 @@ export default function Card({ id, reload, setReload }) {
                     onClick={() => {
                       setEdit(true);
                       setEditContent(item.content);
+                      setSearch(item.location);
                       setEditId(index);
                     }}
                   >

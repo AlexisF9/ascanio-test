@@ -11,10 +11,10 @@ export default function Tableau(props) {
       {props.nameColumn.map((item, index) => {
         return (
           <div
-            className="mt-4 md:mt-0 md:flex-1 h-max bg-slate-200 mx-2 p-2 md:p-4 rounded-md md:max-w-md	"
+            className="mt-4 md:mt-0 md:flex-1 h-max bg-darkLight border border-2 border-darkBorder mx-2 p-2 md:p-4 rounded-md md:max-w-md	"
             key={index}
           >
-            <h2 className="text-center mb-2 uppercase">{item}</h2>
+            <h2 className="text-center mb-2 font-bold	 uppercase">{item}</h2>
             <Card id={index} reload={reload} setReload={setReload} />
             <CreateCard reload={reload} index={index} setReload={setReload} />
           </div>

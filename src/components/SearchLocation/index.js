@@ -21,7 +21,7 @@ export default function SearchLocation({ setSearch, search }) {
         list="listLocation"
         type="text"
         placeholder="Localisation"
-        className="p-2 mt-2"
+        className="p-2  border text-white border-slate-500 bg-transparent rounded focus:outline-0"
         onChange={(e) => {
           setSearch(e.currentTarget.value);
           handleSearch(); // Je relance la recherche de communes à chaque nouvelle lettre ajouté

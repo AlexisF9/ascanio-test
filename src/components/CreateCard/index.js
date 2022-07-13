@@ -44,7 +44,7 @@ export default function ({ reload, index, setReload }) {
             required
             placeholder="Contenu"
             type="text"
-            className="p-2 "
+            className="p-2 mb-3 border text-white border-slate-500 bg-transparent rounded focus:outline-0"
             value={content}
             onChange={(e) => {
               setContent(e.currentTarget.value);
@@ -54,7 +54,7 @@ export default function ({ reload, index, setReload }) {
 
           <SearchLocation setSearch={setSearch} search={search} />
 
-          <button className="w-max flex p-2 font-bold	" type="submit">
+          <button className="w-max flex mt-2 font-bold	text-white" type="submit">
             <span className="material-symbols-outlined">add</span>
             Ajouter
           </button>

@@ -49,7 +49,7 @@ export default function Card({ id, reload, setReload }) {
         data.map((item, index) => {
           return (
             <div
-              className="bg-secondary p-4 mt-4 flex justify-between rounded break-all"
+              className="bg-secondaryLight border-2 border-secondary p-4 mt-4 flex justify-between rounded break-all"
               key={index}
             >
               {edit && editId === index ? ( // On edit les infos ou on les affiches
@@ -57,7 +57,7 @@ export default function Card({ id, reload, setReload }) {
                   <input
                     placeholder="Content"
                     type="text"
-                    className="p-2"
+                    className="p-2 mb-3 border text-white border-slate-500 bg-transparent rounded focus:outline-0"
                     onChange={(e) => {
                       setEditContent(e.currentTarget.value);
                     }}
@@ -79,14 +79,14 @@ export default function Card({ id, reload, setReload }) {
               <div>
                 {edit && editId === index ? (
                   <button
-                    className="material-symbols-outlined"
+                    className="material-symbols-outlined text-primary"
                     onClick={() => editItem(item)}
                   >
                     done
                   </button>
                 ) : (
                   <button
-                    className="material-symbols-outlined"
+                    className="material-symbols-outlined text-primary"
                     onClick={() => {
                       setEdit(true);
                       setEditContent(item.content);
@@ -98,7 +98,7 @@ export default function Card({ id, reload, setReload }) {
                   </button>
                 )}
                 <button
-                  className="material-symbols-outlined "
+                  className="material-symbols-outlined text-primary"
                   onClick={() => suppItem(index)}
                 >
                   delete

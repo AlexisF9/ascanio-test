@@ -43,13 +43,33 @@ export default function Card({ id, reload, setReload }) {
     }
   }
 
+  async function positionHaut(e) {
+    if (e > 0) {
+      const element = await data.splice(e, 1)[0];
+      await data.splice(e - 1, 0, element);
+      await localStorage.setItem(id, JSON.stringify(data));
+
+      setReload(!reload);
+    }
+  }
+
+  async function positionBas(e) {
+    if (e < data.length - 1) {
+      const element = await data.splice(e, 1)[0];
+      await data.splice(e + 1, 0, element);
+      await localStorage.setItem(id, JSON.stringify(data));
+
+      setReload(!reload);
+    }
+  }
+
   return (
     <>
       {data &&
         data.map((item, index) => {
           return (
             <div
-              className="bg-secondaryLight border-2 border-secondary p-4 mt-4 flex justify-between rounded break-all"
+              className="relative group bg-secondaryLight border-2 border-secondary p-4 mt-4 flex justify-between rounded break-all"
               key={index}
             >
               {edit && editId === index ? ( // On edit les infos ou on les affiches
@@ -102,6 +122,21 @@ export default function Card({ id, reload, setReload }) {
                   onClick={() => suppItem(index)}
                 >
                   delete
+                </button>
+              </div>
+
+              <div className="md:opacity-0	group-hover:opacity-100 flex absolute left-[-10px] top-[-10px] bg-white rounded ease-in-out duration-200">
+                <button
+                  class="material-symbols-outlined"
+                  onClick={() => positionHaut(index)}
+                >
+                  expand_less
+                </button>
+                <button
+                  class="material-symbols-outlined"
+                  onClick={() => positionBas(index)}
+                >
+                  expand_more
                 </button>
               </div>
             </div>

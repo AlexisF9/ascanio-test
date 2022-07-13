@@ -11,6 +11,9 @@ module.exports = {
         darkBorder: "#31363e",
         darkLight: "#1f252e",
       },
+      spacing: {
+        "-10px%": "-10px",
+      },
     },
   },
   plugins: [],

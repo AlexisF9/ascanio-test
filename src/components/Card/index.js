@@ -125,7 +125,7 @@ export default function Card({ id, reload, setReload }) {
                 </button>
               </div>
 
-              <div className="md:opacity-0	group-hover:opacity-100 flex absolute left-[-10px] top-[-10px] bg-white rounded ease-in-out duration-200">
+              <div className="md:opacity-0 group-hover:opacity-100 flex absolute left-[50%] translate-x-[-50%] md:translate-x-0 md:left-[-10px] top-[-10px] bg-white rounded ease-in-out duration-200">
                 <button
                   class="material-symbols-outlined"
                   onClick={() => positionHaut(index)}

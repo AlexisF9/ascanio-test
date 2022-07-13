@@ -20,7 +20,7 @@ export default function Card({ id, reload, setReload }) {
 
   // Modification d'une carte
   async function editItem(e) {
-    if (editContent) {
+    if (editContent && search) {
       data[editId].content = await editContent;
       data[editId].location = await search;
       localStorage.setItem(id, JSON.stringify(data));
@@ -77,7 +77,7 @@ export default function Card({ id, reload, setReload }) {
               )}
 
               <div>
-                {edit ? (
+                {edit && editId === index ? (
                   <button
                     className="material-symbols-outlined"
                     onClick={() => editItem(item)}

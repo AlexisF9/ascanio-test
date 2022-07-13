@@ -69,7 +69,7 @@ export default function Card({ id, reload, setReload }) {
         data.map((item, index) => {
           return (
             <div
-              className="relative group bg-secondaryLight border-2 border-secondary p-4 mt-4 flex justify-between rounded break-all"
+              className="relative group bg-secondaryLight border-2 border-secondary p-4 mt-4 flex justify-between "
               key={index}
             >
               {edit && editId === index ? ( // On edit les infos ou on les affiches
@@ -88,8 +88,8 @@ export default function Card({ id, reload, setReload }) {
                 </div>
               ) : (
                 <div>
-                  <p className="font-bold">{item.content}</p>
-                  <p className="flex mt-4">
+                  <p className="font-bold break-words">{item.content}</p>
+                  <p className="flex mt-4 break-words">
                     <span className="material-symbols-outlined">push_pin</span>
                     {item.location}
                   </p>

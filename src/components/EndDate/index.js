@@ -6,7 +6,7 @@ export default function EndDate({ date, setDate }) {
       </label>
       <input
         required
-        className="max-w-max ml-2"
+        className="max-w-max ml-2 border text-white border-slate-500 bg-transparent rounded p-2 focus:outline-0"
         type="date"
         id="endDate"
         name="endDate"

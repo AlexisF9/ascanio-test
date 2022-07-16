@@ -103,7 +103,7 @@ export default function Card({ id, reload, setReload }) {
                         {item.location}
                       </p>
                       <p className="flex mt-4 break-words">
-                        <span class="material-symbols-outlined">timer</span>
+                        <span className="material-symbols-outlined">timer</span>
                         {item.dateEnd}
                       </p>
                     </div>

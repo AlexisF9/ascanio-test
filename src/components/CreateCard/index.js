@@ -72,7 +72,7 @@ export default function ({ reload, index, setReload }) {
       )}
 
       <button
-        className="mt-4 p-2 md:p-3 bg-primary text-center rounded"
+        className="mt-4 p-2 lg:p-3 bg-primary text-center rounded"
         onClick={() => {
           // Au clique je set l'id de la colonne et affiche le fomulaire d'ajout.
           // Au re-clique je vide mon id ce qui ferme le formulaire et vide tout mes champs

@@ -94,6 +94,7 @@ export default function Card({ id, reload, setReload }) {
                       <EndDate date={date} setDate={setDate} />
                     </div>
                   ) : (
+                    // Contenu de la carte
                     <div>
                       <p className="font-bold break-words">{item.content}</p>
                       <p className="flex mt-4 break-words">
@@ -139,6 +140,7 @@ export default function Card({ id, reload, setReload }) {
                     </button>
                   </div>
 
+                  {/* Fleches position haut ou bas dès qu'il y a au moins deux cartes */}
                   <div className="md:opacity-0 group-hover:opacity-100 flex absolute left-[50%] translate-x-[-50%] md:translate-x-0 md:left-[-10px] top-[-10px] bg-white rounded ease-in-out duration-200">
                     {index > 0 && (
                       <button
